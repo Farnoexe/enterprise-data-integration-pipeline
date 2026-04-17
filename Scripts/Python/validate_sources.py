@@ -91,25 +91,6 @@ def save_quarantine_csv(rows, output_path, fieldnames):
         writer.writerows(rows)
 
 
-def save_clean_json(records, output_path):
-    if not records:
-        print(f"  No valid records to save for {output_path.name}")
-        return
-
-    with output_path.open("w", encoding="utf-8") as f:
-        json.dump(records, f, indent=2)
-
-
-def save_quarantine_json(records, output_path):
-    # Records already include rejection_reason before being saved
-    if not records:
-        print(f"  No quarantined records to save for {output_path.name}")
-        return
-
-    with output_path.open("w", encoding="utf-8") as f:
-        json.dump(records, f, indent=2)
-
-
 # -------------------------------------------------------
 # HR Validation
 # -------------------------------------------------------
@@ -260,26 +241,40 @@ def validate_hr_source(timestamp):
 def validate_finance_source(timestamp):
     print("Validating Finance source...")
 
-    raw_file = get_latest_file(get_raw_dir("finance"), "finance_raw_*.json")
-    records = load_json(raw_file)
+    # Read from the raw CSV — Finance data originates as JSON but is
+    # persisted as CSV during ingestion for consistent pipeline storage
+    raw_file = get_latest_file(get_raw_dir("finance"), "finance_raw_*.csv")
+    rows = load_csv(raw_file)
 
-    if not records:
+    if not rows:
         print("  No Finance records found. Skipping.")
         return 0, 0, 0
 
+    # Convert rows to dicts with correct types for validation
+    records = []
+    for row in rows:
+        record = dict(row)
+        try:
+            record["monthly_budget"] = float(record["monthly_budget"])
+        except (ValueError, TypeError):
+            pass
+        records.append(record)
+
+    fieldnames = list(rows[0].keys())
     valid_records, quarantine_records = validate_finance(records)
 
-    clean_path = get_clean_dir("finance") / f"finance_clean_{timestamp}.json"
-    quarantine_path = get_quarantine_dir("finance") / f"finance_quarantine_{timestamp}.json"
+    # Save clean and quarantine as CSV for consistency across all pipeline layers
+    clean_path = get_clean_dir("finance") / f"finance_clean_{timestamp}.csv"
+    quarantine_path = get_quarantine_dir("finance") / f"finance_quarantine_{timestamp}.csv"
 
-    save_clean_json(valid_records, clean_path)
-    save_quarantine_json(quarantine_records, quarantine_path)
+    save_clean_csv(valid_records, clean_path, fieldnames)
+    save_quarantine_csv(quarantine_records, quarantine_path, fieldnames)
 
-    print(f"  Total records: {len(records)}")
+    print(f"  Total records: {len(rows)}")
     print(f"  Valid records: {len(valid_records)}")
     print(f"  Quarantined records: {len(quarantine_records)}")
 
-    return len(records), len(valid_records), len(quarantine_records)
+    return len(rows), len(valid_records), len(quarantine_records)
 
 
 def validate_it_source(timestamp):
@@ -317,23 +312,30 @@ def main():
 
     timestamp = get_timestamp()
 
+    hr_total = hr_valid = hr_quarantine = 0
+    finance_total = finance_valid = finance_quarantine = 0
+    it_total = it_valid = it_quarantine = 0
+
     try:
         hr_total, hr_valid, hr_quarantine = validate_hr_source(timestamp)
-    except Exception as e:
+    except FileNotFoundError as e:
+        print(f"  HR validation failed - file not found: {e}")
+    except (OSError, ValueError) as e:
         print(f"  HR validation failed: {e}")
-        hr_total = hr_valid = hr_quarantine = 0
 
     try:
         finance_total, finance_valid, finance_quarantine = validate_finance_source(timestamp)
-    except Exception as e:
+    except FileNotFoundError as e:
+        print(f"  Finance validation failed - file not found: {e}")
+    except (OSError, ValueError) as e:
         print(f"  Finance validation failed: {e}")
-        finance_total = finance_valid = finance_quarantine = 0
 
     try:
         it_total, it_valid, it_quarantine = validate_it_source(timestamp)
-    except Exception as e:
+    except FileNotFoundError as e:
+        print(f"  IT validation failed - file not found: {e}")
+    except (OSError, ValueError) as e:
         print(f"  IT validation failed: {e}")
-        it_total = it_valid = it_quarantine = 0
 
     print("\nValidation complete.")
     print("Summary:")

@@ -1,0 +1,7 @@
+cost_center_id,department,monthly_budget,currency,budget_month,last_updated
+CC001,Engineering,85000.0,USD,2026-03,2026-03-01
+CC002,Finance,62000.0,USD,2026-03,2026-03-01
+CC003,HR,41000.0,USD,2026-03,2026-03-01
+CC004,IT,73000.0,USD,2026-03,2026-03-01
+CC005,Marketing,55000.0,USD,2026-03,2026-03-01
+CC008,Operations,47000.0,USD,2026-03,2026-03-01

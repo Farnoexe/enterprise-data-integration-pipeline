@@ -32,6 +32,10 @@ TBLPROPERTIES ('skip.header.line.count' = '1');
 
 -- --------------------------------------------
 -- Raw Finance Table
+-- Note: Finance data originates as a JSON-based
+-- API response. During ingestion it is persisted
+-- to the raw layer in CSV format to ensure
+-- consistency across storage and querying in Athena.
 -- --------------------------------------------
 CREATE EXTERNAL TABLE project4_enterprise_integration.finance_raw (
     cost_center_id  STRING,

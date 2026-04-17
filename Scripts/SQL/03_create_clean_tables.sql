@@ -32,6 +32,10 @@ TBLPROPERTIES ('skip.header.line.count' = '1');
 
 -- --------------------------------------------
 -- Clean Finance Table
+-- Note: Finance data originates as a JSON-based
+-- API response. During validation it is persisted
+-- as CSV for consistency across all pipeline layers
+-- and to support querying in Athena.
 -- --------------------------------------------
 CREATE EXTERNAL TABLE project4_enterprise_integration.finance_clean (
     cost_center_id  STRING,

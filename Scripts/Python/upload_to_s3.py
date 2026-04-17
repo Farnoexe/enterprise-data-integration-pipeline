@@ -49,7 +49,7 @@ def upload_raw_files(s3_client, project_root, result_counts):
 
     sources = [
         ("hr", "hr_raw_*.csv"),
-        ("finance", "finance_raw_*.json"),
+        ("finance", "finance_raw_*.csv"),
         ("it", "it_raw_*.csv"),
     ]
 
@@ -76,7 +76,7 @@ def upload_clean_files(s3_client, project_root, result_counts):
 
     sources = [
         ("hr", "hr_clean_*.csv"),
-        ("finance", "finance_clean_*.json"),
+        ("finance", "finance_clean_*.csv"),
         ("it", "it_clean_*.csv"),
     ]
 
@@ -103,7 +103,7 @@ def upload_quarantine_files(s3_client, project_root, result_counts):
 
     sources = [
         ("hr", "hr_quarantine_*.csv"),
-        ("finance", "finance_quarantine_*.json"),
+        ("finance", "finance_quarantine_*.csv"),
         ("it", "it_quarantine_*.csv"),
     ]
 

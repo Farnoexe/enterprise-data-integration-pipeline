@@ -50,14 +50,6 @@ def save_raw_csv(rows, output_path):
         writer.writerows(rows)
 
 
-def save_raw_json(data, output_path):
-    if not data:
-        raise ValueError("No data to save.")
-
-    with output_path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-
 def ingest_hr(timestamp):
     print("Ingesting HR source...")
 
@@ -76,14 +68,21 @@ def ingest_hr(timestamp):
 def ingest_finance(timestamp):
     print("Ingesting Finance source...")
 
+    # Finance data originates as a JSON-based API response.
+    # It is persisted to the raw layer in CSV format to ensure
+    # consistency across storage and querying in Athena.
+    # The original JSON source is preserved in Sources/finance_source.json.
     source_path = get_project_root() / FINANCE_SOURCE_FILE
     data = load_json(source_path)
 
-    output_path = get_raw_dir("finance") / f"finance_raw_{timestamp}.json"
-    save_raw_json(data, output_path)
+    if not data:
+        raise ValueError("No Finance records found in source file.")
+
+    csv_output_path = get_raw_dir("finance") / f"finance_raw_{timestamp}.csv"
+    save_raw_csv(data, csv_output_path)
 
     print(f"  Finance records loaded: {len(data)}")
-    print(f"  Raw file saved to: {output_path}")
+    print(f"  Raw CSV saved to: {csv_output_path}")
 
     return len(data)
 

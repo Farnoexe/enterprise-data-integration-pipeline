@@ -1,0 +1,20 @@
+# Generated pipeline data — not committed to version control
+# Source files in Sources/ are committed as they are inputs to the pipeline
+# All pipeline outputs are reproduced by running the scripts
+Data/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# AWS credentials — never commit these
+.aws/
+credentials
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
