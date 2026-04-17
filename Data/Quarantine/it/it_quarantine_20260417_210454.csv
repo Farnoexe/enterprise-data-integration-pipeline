@@ -1,4 +1,0 @@
-asset_id,employee_id,asset_type,assigned_date,status,location,rejection_reason
-A021,,Laptop,2022-06-15,active,Austin,missing_employee_id
-A022,E016,Laptop,NOT-A-DATE,active,Austin,invalid_assigned_date
-A001,E017,Monitor,2020-06-26,active,Chicago,duplicate_asset_id

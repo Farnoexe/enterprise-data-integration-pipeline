@@ -1,4 +1,0 @@
-employee_id,employee_name,department,location,manager_id,hire_date,status,rejection_reason
-,Oliver Chen,Engineering,Austin,M001,2022-04-14,active,missing_employee_id
-E015,Priya Nair,Marketing,Chicago,M005,NOT-A-DATE,active,invalid_hire_date
-E001,Duplicate Alice,Engineering,New York,M001,2021-03-15,active,duplicate_employee_id
