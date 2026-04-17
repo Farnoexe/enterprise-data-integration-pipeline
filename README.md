@@ -118,6 +118,45 @@ Integration-level quarantine captures cross-system mismatches (e.g., IT records 
 
 ---
 
+## 🚨 Data Quality Actions
+
+Quarantined records are not a dead end — they are actionable data quality issues with clear ownership. Each failure type maps to a recommended remediation action and a responsible team.
+
+### HR Quarantine — 3 records rejected
+
+| Rejection Reason | Recommended Action | Owner |
+|---|---|---|
+| `missing_employee_id` | Collaborate with HR to identify the employee and correct the source record | HR team |
+| `invalid_hire_date` | Verify the correct hire date with HR and update the source system | HR team |
+| `duplicate_employee_id` | Investigate whether this is a data entry error or a legitimate second record — resolve at source | HR team |
+
+### Finance Quarantine — 2 records rejected
+
+| Rejection Reason | Recommended Action | Owner |
+|---|---|---|
+| `missing_department` | Identify which department this cost center belongs to and update the Finance system | Finance team |
+| `invalid_monthly_budget` | A negative budget value indicates a data entry error — escalate to Finance for correction | Finance team |
+
+### IT Quarantine — 3 records rejected
+
+| Rejection Reason | Recommended Action | Owner |
+|---|---|---|
+| `missing_employee_id` | Asset exists but has no assigned employee — IT to confirm assignment or mark as unassigned inventory | IT team |
+| `invalid_assigned_date` | Verify the correct assignment date with IT and update the source system | IT team |
+| `duplicate_asset_id` | Two records share the same asset ID — IT to investigate whether this is a duplicate entry or a reassigned asset | IT team |
+
+### Integration Quarantine — 1 record rejected
+
+| Rejection Reason | Recommended Action | Owner |
+|---|---|---|
+| `unmatched_employee_id` | Asset A024 is assigned to employee E999 who does not exist in HR. Collaborate with both HR and IT to confirm whether this employee exists under a different ID. If the employee cannot be identified, the asset should be reclaimed and returned to IT inventory. | HR + IT teams |
+
+---
+
+> In a production pipeline, these quarantine records would trigger automated notifications to the relevant teams via a ticketing system or email alert. In Version 1, they are documented here as a remediation guide.
+
+---
+
 ## 📊 Analysis & Insights
 
 ### 1. Assets per Department
