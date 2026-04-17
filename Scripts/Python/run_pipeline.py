@@ -6,10 +6,10 @@ from pathlib import Path
 # -------------------------------------------------------
 # Pipeline runner
 # Runs all four pipeline scripts in the correct order:
-#   1. ingest_sources.py   — read source files, save raw copies
-#   2. validate_sources.py — validate records, split clean/quarantine
+#   1. ingest_sources.py    — read source files, save raw copies
+#   2. validate_sources.py  — validate records, split clean/quarantine
 #   3. integrate_datasets.py — join clean sources, produce integrated output
-#   4. upload_to_s3.py     — upload all data layers to S3
+#   4. upload_to_s3.py      — upload all data layers to S3
 #
 # If any script fails, the pipeline stops immediately.
 # This prevents downstream scripts from running on bad data.

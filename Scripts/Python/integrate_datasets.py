@@ -93,19 +93,27 @@ def load_csv(file_path):
         return list(reader)
 
 
-def load_json(file_path):
-    with file_path.open("r", encoding="utf-8") as f:
-        return json.load(f)
-
-
 def load_clean_hr():
     raw_file = get_latest_file(get_clean_dir("hr"), "hr_clean_*.csv")
     return load_csv(raw_file)
 
 
 def load_clean_finance():
-    raw_file = get_latest_file(get_clean_dir("finance"), "finance_clean_*.json")
-    return load_json(raw_file)
+    # Finance clean is persisted as CSV for consistency across pipeline layers
+    raw_file = get_latest_file(get_clean_dir("finance"), "finance_clean_*.csv")
+    rows = load_csv(raw_file)
+
+    # Convert monthly_budget back to float for correct integration output
+    records = []
+    for row in rows:
+        record = dict(row)
+        try:
+            record["monthly_budget"] = float(record["monthly_budget"])
+        except (ValueError, TypeError):
+            pass
+        records.append(record)
+
+    return records
 
 
 def load_clean_it():
@@ -227,15 +235,15 @@ def main():
 
     except FileNotFoundError as e:
         print(f"  Failed to load clean source files: {e}")
-        return
-    except (OSError, json.JSONDecodeError) as e:
+        raise
+    except (OSError, ValueError) as e:
         print(f"  Error reading clean source files: {e}")
-        return
+        raise
 
     # HR and IT are required — integration cannot proceed without them
     if not hr_rows or not it_rows:
         print("  Required clean inputs are empty. Integration cannot continue.")
-        return
+        raise ValueError("Required clean inputs are empty.")
 
     # Build lookup dictionaries for efficient joining
     hr_lookup = build_hr_lookup(hr_rows)
