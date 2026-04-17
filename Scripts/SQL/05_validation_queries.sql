@@ -15,6 +15,9 @@
 SELECT COUNT(*) AS hr_raw_row_count
 FROM project4_enterprise_integration.hr_raw;
 
+SELECT COUNT(*) AS finance_raw_row_count
+FROM project4_enterprise_integration.finance_raw;
+
 SELECT COUNT(*) AS it_raw_row_count
 FROM project4_enterprise_integration.it_raw;
 
@@ -22,12 +25,16 @@ FROM project4_enterprise_integration.it_raw;
 -- --------------------------------------------
 -- 2. CLEAN TABLE ROW COUNTS
 -- Confirms validation reduced row counts correctly
--- HR:  19 raw -> 16 clean (3 quarantined)
--- IT:  24 raw -> 21 clean (3 quarantined)
+-- HR:      19 raw -> 16 clean (3 quarantined)
+-- Finance:  8 raw ->  6 clean (2 quarantined)
+-- IT:      24 raw -> 21 clean (3 quarantined)
 -- --------------------------------------------
 
 SELECT COUNT(*) AS hr_clean_row_count
 FROM project4_enterprise_integration.hr_clean;
+
+SELECT COUNT(*) AS finance_clean_row_count
+FROM project4_enterprise_integration.finance_clean;
 
 SELECT COUNT(*) AS it_clean_row_count
 FROM project4_enterprise_integration.it_clean;

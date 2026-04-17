@@ -47,7 +47,7 @@ Amazon S3 and Athena were used to simulate a scalable, serverless analytics pipe
 ### Finance Source
 - Format: JSON (simulated as a JSON-based API response stored locally to mimic real API ingestion)
 - Fields: `cost_center_id`, `department`, `monthly_budget`, `currency`, `budget_month`, `last_updated`
-- Represents departmental budget allocations from a finance system
+- Finance data originates as a JSON-based API response. During ingestion it is persisted to the raw layer in CSV format to ensure consistency across storage and querying in Athena.
 
 ### IT Source
 - Format: CSV
@@ -222,10 +222,10 @@ s3://metroville-traffic-analytics/
 | Table | Description |
 |-------|-------------|
 | `hr_raw` | Raw HR records |
-| `finance_raw` | Raw Finance records |
+| `finance_raw` | Raw Finance records (persisted as CSV from JSON source) |
 | `it_raw` | Raw IT records |
 | `hr_clean` | Validated HR records |
-| `finance_clean` | Validated Finance records |
+| `finance_clean` | Validated Finance records (persisted as CSV from JSON source) |
 | `it_clean` | Validated IT records |
 | `integrated_department_assets` | Final integrated analytics table |
 
@@ -256,6 +256,7 @@ Project 4 - Enterprise Integration/
 │   └── Integrated/
 ├── Scripts/
 │   ├── Python/
+│   │   ├── run_pipeline.py
 │   │   ├── ingest_sources.py
 │   │   ├── validate_sources.py
 │   │   ├── integrate_datasets.py
@@ -268,6 +269,8 @@ Project 4 - Enterprise Integration/
 │       ├── 05_validation_queries.sql
 │       └── 06_analysis_queries.sql
 ├── Images/
+├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 
@@ -275,13 +278,27 @@ Project 4 - Enterprise Integration/
 
 ## 🔁 How to Run
 
-1. Place source files in `Sources/`
-2. Run `ingest_sources.py` to save raw copies locally
-3. Run `validate_sources.py` to split records into clean and quarantine
-4. Run `integrate_datasets.py` to produce the integrated output
-5. Run `upload_to_s3.py` to upload all layers to S3
-6. Create Athena tables using SQL files 01 through 04
-7. Run validation and analysis queries using SQL files 05 and 06
+### Run the full pipeline in one command
+```bash
+python Scripts/Python/run_pipeline.py
+```
+
+This runs all four scripts in order. If any step fails the pipeline stops immediately to prevent downstream scripts from running on bad data.
+
+### Or run each step manually
+1. `python Scripts/Python/ingest_sources.py`
+2. `python Scripts/Python/validate_sources.py`
+3. `python Scripts/Python/integrate_datasets.py`
+4. `python Scripts/Python/upload_to_s3.py`
+
+### AWS setup
+5. Create Athena tables using SQL files 01 through 04
+6. Run validation and analysis queries using SQL files 05 and 06
+
+### Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
