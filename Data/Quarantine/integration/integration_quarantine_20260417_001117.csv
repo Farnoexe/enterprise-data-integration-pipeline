@@ -1,0 +1,2 @@
+asset_id,employee_id,asset_type,assigned_date,status,location,rejection_reason
+A024,E999,Laptop,2025-01-10,active,Remote,unmatched_employee_id

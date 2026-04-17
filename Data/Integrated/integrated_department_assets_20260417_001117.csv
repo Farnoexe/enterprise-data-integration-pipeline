@@ -1,0 +1,21 @@
+employee_id,employee_name,department,employee_location,employee_status,asset_id,asset_type,asset_status,asset_location,cost_center_id,monthly_budget,currency,budget_month,record_source_date
+E001,Alice Nguyen,Engineering,New York,active,A001,Laptop,active,New York,CC001,85000,USD,2026-03,2026-04-17
+E001,Alice Nguyen,Engineering,New York,active,A002,Monitor,active,New York,CC001,85000,USD,2026-03,2026-04-17
+E002,Brian Okafor,Engineering,Austin,active,A003,Laptop,active,Austin,CC001,85000,USD,2026-03,2026-04-17
+E002,Brian Okafor,Engineering,Austin,active,A004,Keyboard,active,Austin,CC001,85000,USD,2026-03,2026-04-17
+E003,Carmen Silva,Finance,Chicago,active,A005,Laptop,active,Chicago,CC002,62000,USD,2026-03,2026-04-17
+E004,David Park,Finance,Chicago,active,A006,Laptop,active,Chicago,CC002,62000,USD,2026-03,2026-04-17
+E004,David Park,Finance,Chicago,active,A007,Docking Station,active,Chicago,CC002,62000,USD,2026-03,2026-04-17
+E005,Elena Marsh,HR,New York,active,A008,Laptop,active,New York,CC003,41000,USD,2026-03,2026-04-17
+E006,Frank Delgado,IT,Austin,active,A009,Laptop,active,Austin,CC004,73000,USD,2026-03,2026-04-17
+E006,Frank Delgado,IT,Austin,active,A010,Monitor,active,Austin,CC004,73000,USD,2026-03,2026-04-17
+E006,Frank Delgado,IT,Austin,active,A011,Keyboard,retired,Austin,CC004,73000,USD,2026-03,2026-04-17
+E007,Grace Kim,IT,Austin,active,A012,Laptop,active,Austin,CC004,73000,USD,2026-03,2026-04-17
+E008,Henry Osei,Marketing,Chicago,active,A013,Laptop,active,Chicago,CC005,55000,USD,2026-03,2026-04-17
+E009,Irene Tran,Marketing,New York,active,A014,Laptop,active,New York,CC005,55000,USD,2026-03,2026-04-17
+E010,James Leung,Engineering,Austin,active,A015,Laptop,active,Austin,CC001,85000,USD,2026-03,2026-04-17
+E010,James Leung,Engineering,Austin,active,A016,Monitor,active,Austin,CC001,85000,USD,2026-03,2026-04-17
+E011,Karen Adeyemi,HR,Chicago,active,A017,Laptop,active,Chicago,CC003,41000,USD,2026-03,2026-04-17
+E012,Luis Rojas,Finance,New York,active,A018,Laptop,active,New York,CC002,62000,USD,2026-03,2026-04-17
+E013,Maya Patel,IT,New York,active,A019,Laptop,active,New York,CC004,73000,USD,2026-03,2026-04-17
+E013,Maya Patel,IT,New York,active,A020,Monitor,active,New York,CC004,73000,USD,2026-03,2026-04-17

@@ -1,0 +1,25 @@
+asset_id,employee_id,asset_type,assigned_date,status,location
+A001,E001,Laptop,2021-03-16,active,New York
+A002,E001,Monitor,2021-03-16,active,New York
+A003,E002,Laptop,2020-07-23,active,Austin
+A004,E002,Keyboard,2020-07-23,active,Austin
+A005,E003,Laptop,2019-11-02,active,Chicago
+A006,E004,Laptop,2022-01-11,active,Chicago
+A007,E004,Docking Station,2022-01-11,active,Chicago
+A008,E005,Laptop,2021-07-01,active,New York
+A009,E006,Laptop,2018-04-19,active,Austin
+A010,E006,Monitor,2018-04-19,active,Austin
+A011,E006,Keyboard,2018-04-19,retired,Austin
+A012,E007,Laptop,2023-03-01,active,Austin
+A013,E008,Laptop,2020-09-06,active,Chicago
+A014,E009,Laptop,2022-11-18,active,New York
+A015,E010,Laptop,2017-08-13,active,Austin
+A016,E010,Monitor,2017-08-13,active,Austin
+A017,E011,Laptop,2023-05-02,active,Chicago
+A018,E012,Laptop,2021-12-21,active,New York
+A019,E013,Laptop,2019-03-08,active,New York
+A020,E013,Monitor,2019-03-08,active,New York
+A021,,Laptop,2022-06-15,active,Austin
+A022,E016,Laptop,NOT-A-DATE,active,Austin
+A001,E017,Monitor,2020-06-26,active,Chicago
+A024,E999,Laptop,2025-01-10,active,Remote

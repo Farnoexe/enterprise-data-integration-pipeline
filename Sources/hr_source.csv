@@ -1,0 +1,20 @@
+employee_id,employee_name,department,location,manager_id,hire_date,status
+E001,Alice Nguyen,Engineering,New York,M001,2021-03-15,active
+E002,Brian Okafor,Engineering,Austin,M001,2020-07-22,active
+E003,Carmen Silva,Finance,Chicago,M002,2019-11-01,active
+E004,David Park,Finance,Chicago,M002,2022-01-10,active
+E005,Elena Marsh,HR,New York,M003,2021-06-30,active
+E006,Frank Delgado,IT,Austin,M004,2018-04-18,active
+E007,Grace Kim,IT,Austin,M004,2023-02-28,active
+E008,Henry Osei,Marketing,Chicago,M005,2020-09-05,active
+E009,Irene Tran,Marketing,New York,M005,2022-11-17,active
+E010,James Leung,Engineering,Austin,M001,2017-08-12,active
+E011,Karen Adeyemi,HR,Chicago,M003,2023-05-01,active
+E012,Luis Rojas,Finance,New York,M002,2021-12-20,active
+E013,Maya Patel,IT,New York,M004,2019-03-07,active
+,Oliver Chen,Engineering,Austin,M001,2022-04-14,active
+E015,Priya Nair,Marketing,Chicago,M005,NOT-A-DATE,active
+E001,Duplicate Alice,Engineering,New York,M001,2021-03-15,active
+E016,Rachel Burns,HR,Austin,M003,2023-08-19,inactive
+E017,Samuel Torres,Finance,Chicago,M002,2020-06-25,active
+E018,Tina Yamamoto,IT,New York,M004,2022-10-03,active
